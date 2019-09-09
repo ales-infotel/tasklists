@@ -239,15 +239,6 @@ class PluginTasklistsTask extends CommonDBTM {
          $this->addStandardTab('PluginTasklistsTask_Comment', $ong, $options);
          $this->addStandardTab('PluginTasklistsTicket', $ong, $options);
       }
-      $plugin = new Plugin();
-      if($plugin->isActivated("presales") && Session::haveRight("plugin_presales_task",READ)){
-         $presalesTask = new PluginPresalesTask();
-         $res = $presalesTask->find(["plugin_tasklists_tasks_id" => $this->fields['id']]);
-         if(count($res) == 1){
-            $this->addStandardTab('PluginPresalesTask', $ong, $options);
-         }
-
-      }
       $this->addStandardTab('Notepad', $ong, $options);
       $this->addStandardTab('Log', $ong, $options);
 

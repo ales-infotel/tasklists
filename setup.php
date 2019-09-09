@@ -62,7 +62,13 @@ function plugin_init_tasklists() {
       if (Session::haveRight("plugin_tasklists", READ)) {
          $PLUGIN_HOOKS['menu_toadd']['tasklists'] = ['helpdesk' => 'PluginTasklistsMenu'];
       }
-
+      $plugin = new Plugin();
+      if($plugin->isActivated('presales')){
+         if(Session::haveRight('plugin_presales_task',READ)){
+            Plugin::registerClass('PluginPresalesTask',
+               ['addtabon' => 'PluginTasklistsTask']);
+         }
+      }
       if (class_exists('PluginMydashboardMenu')) {
          $PLUGIN_HOOKS['mydashboard']['tasklists'] = ["PluginTasklistsDashboard"];
       }
